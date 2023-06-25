@@ -36,7 +36,7 @@ describe("Домашнее задание к занятию 8 «Функции �
   });
 
   describe("Задача №2 Усовершенствованный декоратор отложенного вызова", () => {
-    
+
     it("Декоратор выполняет первый синхронный вызов функции", () => {
       let hasCalled = false;
       const functionToDecorate = () => {
@@ -84,10 +84,10 @@ describe("Домашнее задание к занятию 8 «Функции �
       expect(decoratedFunction.count).toBe(0);
       decoratedFunction(1, 2, 3);
       expect(decoratedFunction.count).toBe(1);
-  
+
       decoratedFunction(1, 2, 3);
       expect(decoratedFunction.count).toBe(1);
-  
+
       setTimeout(() => {
         decoratedFunction(1, 2, 3);
         expect(decoratedFunction.count).toBe(2);
