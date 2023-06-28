@@ -18,25 +18,21 @@ function cachingDecoratorNew(func) {
 
 //Задача № 2
 function debounceDecoratorNew(func, delay) {
-    let intervalID = null;
+    let timerID = null;
     function wrap(...args) {
-        wrap.allCount += 1;
-        if (intervalID) {
-            clearTimeout(intervalID);
-            intervalID = setTimeout(processAfterDelay, delay, ...args);
-            return;
+        if (!timerID) { // самый первый раз функция должна вызваться мгновенно + второй раз асинхронно
+            wrap.count += 1;
+            func(...args);
         }
-        wrap.count += 1;
-        intervalID = setTimeout(processAfterDelay, delay, ...args);
-        return func(...args);
-
+        wrap.allCount += 1;
+        clearTimeout(timerID);
+        timerID = setTimeout(processAfterDelay, delay, ...args);
     }
     wrap.allCount = 0;
     wrap.count = 0;
     function processAfterDelay(...args) {
-        intervalID = null;
-        // wrap.count += 1;
-        return func(...args);
+        wrap.count += 1;
+        func(...args);
     }
     return wrap;
 }
