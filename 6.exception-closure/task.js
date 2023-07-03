@@ -28,7 +28,8 @@ class Triangle {
 
     get area() {
         const p = this.perimeter / 2;
-        const s = Math.sqrt(p * (p - this.sides[0]) * (p - this.sides[1]) * (p - this.sides[2]));
+        // формула Герона через reduce
+        const s = Math.sqrt(this.sides.reduce((acc, el) => acc * (p - el), p));
         return +s.toFixed(3);
     }
 }
